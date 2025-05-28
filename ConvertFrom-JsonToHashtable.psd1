@@ -10,7 +10,7 @@
 
     RootModule        = 'ConvertFrom-JsonToHashtable.psm1'
 
-    ModuleVersion     = '0.1.0'
+    ModuleVersion     = '0.1.1'
 
     GUID              = '9aa690d8-6804-43a8-b08c-ede290dd9ee9'
 
@@ -18,7 +18,12 @@
 
     Copyright         = '(c) abgox. All rights reserved.'
 
-    Description       = 'The ConvertFrom-Json method does not have the -AsHashtable switch in Windows PowerShell, which makes it difficult to convert json to hashtable. This module is used to solve this problem. For more information, please visit the project: https://github.com/abgox/ConvertFrom-JsonToHashtable | https://gitee.com/abgox/ConvertFrom-JsonToHashtable'
+    Description       = 'The ConvertFrom-Json method does not have the -AsHashtable switch in Windows PowerShell, which makes it inconvenient to convert json to hashtable.
+ This module is used to solve this problem.
+ For more information, please visit the project:
+  - Github:  https://github.com/abgox/ConvertFrom-JsonToHashtable
+  - Gitee:   https://gitee.com/abgox/ConvertFrom-JsonToHashtable
+ '
 
     PowerShellVersion = '5.0'
 
