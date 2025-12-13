@@ -44,19 +44,19 @@ JSON to Hashtable Conversion for [Windows PowerShell 5.0+](https://learn.microso
 
 ## Install
 
-- Use `Install-Module`
+- [Install-Module](https://learn.microsoft.com/powershell/module/powershellget/install-module)
 
   ```powershell
   Install-Module ConvertFrom-JsonAsHashtable
   ```
 
-- Use `Install-PSResource`
+- [Install-PSResource](https://learn.microsoft.com/powershell/module/microsoft.powershell.psresourceget/install-psresource)
 
   ```powershell
   Install-PSResource ConvertFrom-JsonAsHashtable
   ```
 
-- Use [Scoop](https://scoop.sh/)
+- [Scoop](https://scoop.sh/)
 
   - Add the [abyss](https://abyss.abgox.com) bucket via [Github](https://github.com/abgox/abyss) or [Gitee](https://gitee.com/abgox/abyss).
 

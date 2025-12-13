@@ -34,7 +34,7 @@
 ---
 
 <p align="center">
-  <strong>喜欢这个项目？请给它一个 Star ⭐️ 或 <a href="https://abgox.com/donate">赞赏 💰</a></strong>
+  <strong>喜欢这个项目？请给它 Star ⭐️ 或 <a href="https://abgox.com/donate">赞赏 💰</a></strong>
 </p>
 
 ## 介绍
@@ -43,19 +43,19 @@
 
 ## 安装
 
-- 使用 `Install-Module`
+- [Install-Module](https://learn.microsoft.com/powershell/module/powershellget/install-module)
 
   ```powershell
   Install-Module ConvertFrom-JsonAsHashtable
   ```
 
-- 使用 `Install-PSResource`
+- [Install-PSResource](https://learn.microsoft.com/powershell/module/microsoft.powershell.psresourceget/install-psresource)
 
   ```powershell
   Install-PSResource ConvertFrom-JsonAsHashtable
   ```
 
-- 使用 [Scoop](https://scoop.sh/)
+- [Scoop](https://scoop.sh/)
 
   - 添加 [abyss](https://abyss.abgox.com) bucket ([Github](https://github.com/abgox/abyss) 或 [Gitee](https://gitee.com/abgox/abyss))
   - 安装它
