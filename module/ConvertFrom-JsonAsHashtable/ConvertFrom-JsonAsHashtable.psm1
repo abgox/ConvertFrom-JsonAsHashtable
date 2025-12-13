@@ -70,7 +70,8 @@ function ConvertFrom-JsonAsHashtable {
             # IDictionary (Hashtable, Dictionary<,>) -> @{ }
             if ($obj -is [System.Collections.IDictionary]) {
                 $ht = @{}
-                foreach ($k in $obj.Keys) {
+                $keys = $obj.Keys
+                foreach ($k in $keys) {
                     $ht[$k] = ConvertRecursively $obj[$k]
                 }
                 return $ht
@@ -79,7 +80,8 @@ function ConvertFrom-JsonAsHashtable {
             # PSCustomObject -> @{ }
             if ($obj -is [System.Management.Automation.PSCustomObject]) {
                 $ht = @{}
-                foreach ($p in $obj.PSObject.Properties) {
+                $props = $obj.PSObject.Properties
+                foreach ($p in $props) {
                     $ht[$p.Name] = ConvertRecursively $p.Value
                 }
                 return $ht
