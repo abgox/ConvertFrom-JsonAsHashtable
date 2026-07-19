@@ -3,7 +3,7 @@
 
     RootModule        = 'ConvertFrom-JsonAsHashtable.psm1'
 
-    ModuleVersion     = '2.0.0'
+    ModuleVersion     = '2.0.1'
 
     GUID              = 'abcd032a-8e73-4968-8c20-6f86c080086c'
 
