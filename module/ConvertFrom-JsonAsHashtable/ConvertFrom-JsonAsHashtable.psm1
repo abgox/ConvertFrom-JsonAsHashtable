@@ -200,7 +200,6 @@ function ConvertFrom-JsonAsHashtable {
         }
 
         $parser = [JsonParserState]::new($jsonString)
-        # Stack: three parallel lists instead of list of hashtable (faster access)
         $stkType = [System.Collections.Generic.List[int]]::new()
         $stkCont = [System.Collections.Generic.List[object]]::new()
         $stkKey = [System.Collections.Generic.List[object]]::new()
@@ -369,7 +368,7 @@ function ConvertFrom-JsonAsHashtable {
 
             if ($ch -eq '{') {
                 $parser.Pos++
-                $ht = [System.Collections.Hashtable]::new([System.StringComparer]::Ordinal)
+                $ht = [System.Collections.Specialized.OrderedDictionary]::new([System.StringComparer]::Ordinal)
                 $stkType.Add($_FT_OBJECT); $stkCont.Add($ht); $stkKey.Add($null)
                 continue
             }
@@ -407,7 +406,7 @@ function ConvertFrom-JsonAsHashtable {
                     $haveRoot = $true
                 }
                 else {
-                    # Inline _JsonAttach
+                    # Inline attach
                     $current = $value
                     $attaching = $true
                     while ($attaching) {

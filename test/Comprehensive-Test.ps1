@@ -25,14 +25,16 @@ function Assert-Equal {
     elseif ($null -eq $Expected -or $null -eq $Actual) {
         $equal = $false
     }
-    elseif ($Expected -is [hashtable] -and $Actual -is [hashtable]) {
+    elseif (($Expected -is [hashtable] -or $Expected -is [System.Collections.Specialized.OrderedDictionary]) -and
+        ($Actual -is [hashtable] -or $Actual -is [System.Collections.Specialized.OrderedDictionary])) {
         $equal = $true
         if ($Expected.Count -ne $Actual.Count) { $equal = $false }
         else {
             foreach ($k in $Expected.Keys) {
-                if (-not $Actual.ContainsKey($k)) { $equal = $false; break }
+                if (-not $Actual.Contains($k)) { $equal = $false; break }
                 # Deep compare for nested hashtables
-                if ($Expected[$k] -is [hashtable] -and $Actual[$k] -is [hashtable]) {
+                if (($Expected[$k] -is [hashtable] -or $Expected[$k] -is [System.Collections.Specialized.OrderedDictionary]) -and
+                    ($Actual[$k] -is [hashtable] -or $Actual[$k] -is [System.Collections.Specialized.OrderedDictionary])) {
                     if (-not (Compare-HashtableDeep $Expected[$k] $Actual[$k])) { $equal = $false; break }
                 }
                 elseif ($Expected[$k] -ne $Actual[$k]) { $equal = $false; break }
@@ -64,8 +66,8 @@ function Assert-Equal {
     }
     else {
         $script:FailCount++
-        $expStr = if ($null -eq $Expected) { '<null>' } elseif ($Expected -is [hashtable]) { '@{...}' } else { $Expected.ToString() }
-        $actStr = if ($null -eq $Actual) { '<null>' } elseif ($Actual -is [hashtable]) { '@{...}' } else { $Actual.ToString() }
+        $expStr = if ($null -eq $Expected) { '<null>' } elseif ($Expected -is [hashtable] -or $Expected -is [System.Collections.Specialized.OrderedDictionary]) { '@{...}' } else { $Expected.ToString() }
+        $actStr = if ($null -eq $Actual) { '<null>' } elseif ($Actual -is [hashtable] -or $Actual -is [System.Collections.Specialized.OrderedDictionary]) { '@{...}' } else { $Actual.ToString() }
         Write-Host "  [FAIL] $Name  Expected: $expStr  Got: $actStr" -ForegroundColor Red
         if ($Note) { Write-Host "         $Note" -ForegroundColor Yellow }
     }
@@ -82,10 +84,11 @@ function Compare-HashtableDeep {
         }
         return $true
     }
-    if ($a -is [hashtable] -and $b -is [hashtable]) {
+    if (($a -is [hashtable] -or $a -is [System.Collections.Specialized.OrderedDictionary]) -and
+        ($b -is [hashtable] -or $b -is [System.Collections.Specialized.OrderedDictionary])) {
         if ($a.Count -ne $b.Count) { return $false }
         foreach ($k in $a.Keys) {
-            if (-not $b.ContainsKey($k)) { return $false }
+            if (-not $b.Contains($k)) { return $false }
             if (-not (Compare-HashtableDeep $a[$k] $b[$k])) { return $false }
         }
         return $true
@@ -260,7 +263,7 @@ Write-Host "`n--- Section 4: Objects ---" -ForegroundColor Yellow
 
 # Empty object
 $result = '{}' | ConvertFrom-JsonAsHashtable
-Assert-Equal 'Empty object is hashtable' $true ($result -is [hashtable])
+Assert-Equal 'Empty object is hashtable' $true ($result -is [hashtable] -or $result -is [System.Collections.Specialized.OrderedDictionary])
 Assert-Equal 'Empty object count 0' 0 $result.Count
 
 # Single key
@@ -273,7 +276,7 @@ Assert-Equal 'Multi-key object' @{a = 1; b = 'two'; c = $true } $result
 
 # Empty key
 $result = '{"":"value"}' | ConvertFrom-JsonAsHashtable
-$hasEmptyKey = $result.ContainsKey('')
+$hasEmptyKey = $result.Contains('')
 Assert-Equal 'Empty string key' $true $hasEmptyKey
 
 # Special character keys
@@ -286,6 +289,18 @@ Assert-Equal 'Dot key' 3 $result.'key.with.dots'
 $result = '{"键":"值","キー":"バリュー"}' | ConvertFrom-JsonAsHashtable
 Assert-Equal 'Unicode keys' '值' $result.'键'
 Assert-Equal 'Japanese keys' 'バリュー' $result.'キー'
+
+# Key order preservation
+$result = '{"c":3,"a":1,"b":2}' | ConvertFrom-JsonAsHashtable
+Assert-Equal 'Key order preserved' 'c,a,b' ($result.Keys -join ',')
+
+$result = '{"z":1,"m":2,"a":3}' | ConvertFrom-JsonAsHashtable
+Assert-Equal 'Key order reversed' 'z,m,a' ($result.Keys -join ',')
+
+# Nested key order
+$result = '{"b":{"d":4,"c":3},"a":1}' | ConvertFrom-JsonAsHashtable
+Assert-Equal 'Nested outer order' 'b,a' ($result.Keys -join ',')
+Assert-Equal 'Nested inner order' 'd,c' ($result.b.Keys -join ',')
 
 # ============================================================
 # SECTION 5: Arrays
@@ -558,7 +573,7 @@ Assert-Equal '100 levels deep' 'deep' $current
 Write-Host "`n--- Section 18: Empty Container Edge Cases ---" -ForegroundColor Yellow
 
 $result = '{"a":{},"b":[],"c":""}' | ConvertFrom-JsonAsHashtable
-Assert-Equal 'Empty object value' $true ($result.a -is [hashtable])
+Assert-Equal 'Empty object value' $true ($result.a -is [hashtable] -or $result.a -is [System.Collections.Specialized.OrderedDictionary])
 Assert-Equal 'Empty object count' 0 $result.a.Count
 Assert-Equal 'Empty array value' $true ($result.b -is [object[]])
 Assert-Equal 'Empty array count' 0 $result.b.Count
@@ -576,7 +591,7 @@ Assert-Equal 'Array with empty containers - null' $null $result[3]
 Write-Host "`n--- Section 19: JSON Null Handling ---" -ForegroundColor Yellow
 
 $result = '{"a":null,"b":1}' | ConvertFrom-JsonAsHashtable
-Assert-Equal 'Null value exists in hashtable' $true $result.ContainsKey('a')
+Assert-Equal 'Null value exists in hashtable' $true $result.Contains('a')
 Assert-Equal 'Null value is null' $null $result.a
 Assert-Equal 'Non-null value' 1 $result.b
 
