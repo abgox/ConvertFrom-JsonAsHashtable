@@ -39,7 +39,10 @@
 
 ## 介绍
 
-适用于 [Windows PowerShell 5.0+](https://learn.microsoft.com/powershell/scripting/what-is-windows-powershell) 的 JSON 到哈希表的转换，类似于 [PowerShell 7.0+](https://learn.microsoft.com/powershell/scripting/overview) 的 `ConvertFrom-Json -AsHashtable`
+适用于 [Windows PowerShell 5+](https://learn.microsoft.com/powershell/scripting/what-is-windows-powershell) 的 JSON 到哈希表的转换，类似于 [PowerShell 7+](https://learn.microsoft.com/powershell/scripting/overview) 的 `ConvertFrom-Json -AsHashtable`
+
+- **PowerShell 7+**：直接委托给原生的 `ConvertFrom-Json -AsHashtable`
+- **PowerShell 5+**：使用手写的迭代 JSON 解析器
 
 ## 安装
 
@@ -55,8 +58,7 @@
   Install-PSResource ConvertFrom-JsonAsHashtable
   ```
 
-- [Scoop](https://scoop.sh/)
-
+- [Scoop](https://scoop.sh)
   - 添加 [abyss](https://abyss.abgox.com) bucket ([Github](https://github.com/abgox/abyss) 或 [Gitee](https://gitee.com/abgox/abyss))
   - 安装它
 
@@ -67,17 +69,17 @@
 ## 使用
 
 ```powershell
-   $jsonString = '{
+$jsonString = '{
        "key1": "value1",
        "key2": {
-           "subkey1": "subvalue1",
-           "subkey2": ["item1", "item2"]
+           "subKey1": "subValue1",
+           "subKey2": ["item1", "item2"]
        },
        "key3": [
-           {"nestedkey1": "nestedvalue1"},
-           {"nestedkey2": "nestedvalue2"}
+           {"nestedKey1": "nestedValue1"},
+           {"nestedKey2": "nestedValue2"}
        ]
    }'
 
-   $jsonString | ConvertFrom-JsonAsHashtable
+$jsonString | ConvertFrom-JsonAsHashtable
 ```

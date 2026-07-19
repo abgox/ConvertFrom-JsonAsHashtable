@@ -40,7 +40,10 @@
 
 ## Introduce
 
-JSON to Hashtable Conversion for [Windows PowerShell 5.0+](https://learn.microsoft.com/powershell/scripting/what-is-windows-powershell), similar to `ConvertFrom-Json -AsHashtable` in [PowerShell 7.0+](https://learn.microsoft.com/powershell/scripting/overview).
+JSON to Hashtable Conversion for [Windows PowerShell 5+](https://learn.microsoft.com/powershell/scripting/what-is-windows-powershell), similar to `ConvertFrom-Json -AsHashtable` in [PowerShell 7+](https://learn.microsoft.com/powershell/scripting/overview).
+
+- **PowerShell 7+**: Directly delegates to the native `ConvertFrom-Json -AsHashtable`.
+- **PowerShell 5+**: Uses a hand-written iterative JSON parser.
 
 ## Install
 
@@ -56,8 +59,7 @@ JSON to Hashtable Conversion for [Windows PowerShell 5.0+](https://learn.microso
   Install-PSResource ConvertFrom-JsonAsHashtable
   ```
 
-- [Scoop](https://scoop.sh/)
-
+- [Scoop](https://scoop.sh)
   - Add the [abyss](https://abyss.abgox.com) bucket via [Github](https://github.com/abgox/abyss) or [Gitee](https://gitee.com/abgox/abyss).
 
   - Install it.
@@ -69,17 +71,17 @@ JSON to Hashtable Conversion for [Windows PowerShell 5.0+](https://learn.microso
 ## Usage
 
 ```powershell
-   $jsonString = '{
+$jsonString = '{
        "key1": "value1",
        "key2": {
-           "subkey1": "subvalue1",
-           "subkey2": ["item1", "item2"]
+           "subKey1": "subValue1",
+           "subKey2": ["item1", "item2"]
        },
        "key3": [
-           {"nestedkey1": "nestedvalue1"},
-           {"nestedkey2": "nestedvalue2"}
+           {"nestedKey1": "nestedValue1"},
+           {"nestedKey2": "nestedValue2"}
        ]
    }'
 
-   $jsonString | ConvertFrom-JsonAsHashtable
+$jsonString | ConvertFrom-JsonAsHashtable
 ```
