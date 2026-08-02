@@ -3,7 +3,5 @@
     "editor.defaultFormatter": "ms-vscode.powershell"
   },
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "editor.formatOnSave": true,
-  "filename-lint.enabled": true,
-  "filename-lint.excludePatterns": ["module/**", "test/**", "readme.*.md"]
+  "editor.formatOnSave": true
 }

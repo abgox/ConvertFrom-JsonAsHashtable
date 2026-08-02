@@ -15,7 +15,7 @@
 JSON to Hashtable Conversion for Windows PowerShell 5+.
 Similar to 'ConvertFrom-Json -AsHashtable' in PowerShell 7+.
   - Website: https://convertfrom-jsonashashtable.abgox.com
-  - Github: https://github.com/abgox/ConvertFrom-JsonAsHashtable
+  - GitHub: https://github.com/abgox/ConvertFrom-JsonAsHashtable
   - Gitee: https://gitee.com/abgox/ConvertFrom-JsonAsHashtable
 '@
 
@@ -29,7 +29,7 @@ Similar to 'ConvertFrom-Json -AsHashtable' in PowerShell 7+.
 
             Tags       = @('PowerShell', 'json', 'ConvertFrom-Json' , 'ConvertFrom-JsonAsHashtable', 'ConvertFrom-JsonToHashtable', 'Windows')
 
-            LicenseUri = 'https://github.com/abgox/ConvertFrom-JsonAsHashtable/blob/main/license'
+            LicenseUri = 'https://github.com/abgox/ConvertFrom-JsonAsHashtable/blob/main/LICENSE'
 
             ProjectUri = 'https://github.com/abgox/ConvertFrom-JsonAsHashtable'
 

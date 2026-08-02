@@ -3,16 +3,15 @@
 </p>
 
 <p align="center">
-    <a href="readme.zh-CN.md">简体中文</a> |
-    <a href="readme.md">English</a> |
+    <a href="README.md">English</a> |
     <a href="https://www.powershellgallery.com/packages/ConvertFrom-JsonAsHashtable">Powershell Gallery</a> |
-    <a href="https://github.com/abgox/ConvertFrom-JsonAsHashtable">Github</a> |
-    <a href="https://gitee.com/abgox/ConvertFrom-JsonAsHashtable">
-    Gitee</a>
+    <a href="https://github.com/abgox/ConvertFrom-JsonAsHashtable">GitHub</a> |
+    <a href="https://gitee.com/abgox/ConvertFrom-JsonAsHashtable">Gitee</a> |
+    <a href="https://gitcode.com/abgox/ConvertFrom-JsonAsHashtable">GitCode</a>
 </p>
 
 <p align="center">
-    <a href="https://github.com/abgox/ConvertFrom-JsonAsHashtable/blob/main/license">
+    <a href="https://github.com/abgox/ConvertFrom-JsonAsHashtable/blob/main/LICENSE">
         <img src="https://img.shields.io/github/license/abgox/ConvertFrom-JsonAsHashtable" alt="license" />
     </a>
     <a href="https://www.powershellgallery.com/packages/ConvertFrom-JsonAsHashtable">
@@ -35,17 +34,17 @@
 ---
 
 <p align="center">
-  <strong>Star ⭐️ or <a href="https://abgox.com/donate">Donate 💰</a> if you like it!</strong>
+  <strong>喜欢这个项目？请给它 Star ⭐️ 或 <a href="https://me.abgox.com/donate">赞赏 💰</a></strong>
 </p>
 
-## Introduce
+## 介绍
 
-JSON to Hashtable Conversion for [Windows PowerShell 5+](https://learn.microsoft.com/powershell/scripting/what-is-windows-powershell), similar to `ConvertFrom-Json -AsHashtable` in [PowerShell 7+](https://learn.microsoft.com/powershell/scripting/overview).
+适用于 [Windows PowerShell 5+ (Desktop)](https://learn.microsoft.com/powershell/scripting/what-is-windows-powershell) 的 JSON 到哈希表的转换，类似于 [PowerShell 7+ (Core)](https://learn.microsoft.com/powershell/scripting/overview) 的 `ConvertFrom-Json -AsHashtable`
 
-- **PowerShell 7+**: Directly delegates to the native `ConvertFrom-Json -AsHashtable`.
-- **PowerShell 5+**: Uses a hand-written iterative JSON parser.
+- **PowerShell 7+**：直接委托给原生的 `ConvertFrom-Json -AsHashtable`
+- **PowerShell 5+**：使用手写的迭代 JSON 解析器
 
-## Install
+## 安装
 
 - [Install-Module](https://learn.microsoft.com/powershell/module/powershellget/install-module)
 
@@ -60,15 +59,14 @@ JSON to Hashtable Conversion for [Windows PowerShell 5+](https://learn.microsoft
   ```
 
 - [Scoop](https://scoop.sh)
-  - Add the [abyss](https://abyss.abgox.com) bucket via [Github](https://github.com/abgox/abyss) or [Gitee](https://gitee.com/abgox/abyss).
+  - 添加 [abyss](https://abyss.abgox.com) bucket ([GitHub](https://github.com/abgox/abyss) 或 [Gitee](https://gitee.com/abgox/abyss))
+  - 安装它
 
-  - Install it.
+    ```shell
+    scoop install abyss/abgox.ConvertFrom-JsonAsHashtable
+    ```
 
-  ```shell
-  scoop install abyss/abgox.ConvertFrom-JsonAsHashtable
-  ```
-
-## Usage
+## 使用
 
 ```powershell
 $jsonString = '{
@@ -85,3 +83,7 @@ $jsonString = '{
 
 $jsonString | ConvertFrom-JsonAsHashtable
 ```
+
+## License
+
+[MIT](./LICENSE) © [abgox](https://me.abgox.com)
